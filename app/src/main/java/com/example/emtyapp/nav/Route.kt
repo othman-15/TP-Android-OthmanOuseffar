@@ -54,7 +54,7 @@ fun HomeScreen(onNavigateToDetails: (String) -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Bienvenue sur HomeScreen")
+        Text(text = "Liste de Produits")
         Spacer(modifier = Modifier.height(20.dp))
         Button(onClick = { onNavigateToDetails("PR1234") }) {
             Text(text = "Aller aux détails du produit PR1234")
