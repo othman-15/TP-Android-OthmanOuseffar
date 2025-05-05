@@ -46,112 +46,13 @@ import com.example.emtyapp.ui.theme.EmtyAppTheme
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            EmtyAppTheme {
-                Surface{
-                    AppNavigation()
-                }
-            }
+            AppNavigation()
         }
     }
 }
 
 
 
-@Composable
-fun MyComposable(id: String) {
-    LaunchedEffect(id) {
-        // Coroutine démarrée quand `id` change
-        delay(1000)
-        println("Chargement terminé pour $id")
-    }
-}
-
-@Composable
-fun MyDisposable() {
-    DisposableEffect(Unit) {
-        println("Composé")
-
-        onDispose {
-            println("Nettoyé")
-        }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-val imageModifier = Modifier
-    .size(150.dp)
-    .border(BorderStroke(1.dp, Color.Black))
-    .background(Color.Yellow)
-
-@Composable  fun Logo() {
-    Image(
-        painter = painterResource(id = R.drawable.dog),
-        contentDescription = stringResource(R.string.dog),
-        contentScale = ContentScale.Fit,
-        modifier = imageModifier
-    )
-}
-
-@Composable
-fun LogoCard(modifier: Modifier = Modifier) {
-    Card(
-        modifier = modifier
-            .padding(8.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        shape = RoundedCornerShape(16.dp)
-    ) {
-        CounterScreen()
-        // Appel de votre composable Logo à l’intérieur de la Card
-        Logo()
-    }
-}
-
-/*@Composable
-fun CounterSaveable() {
-    // Crée un état “count” initialisé à 0 et mémorisé
-    var count by rememberSaveable  { mutableIntStateOf(0) }
-
-    Button(onClick = { count++ }) {
-        Text("Vous avez cliqué $count fois")
-    }
-}*/
-
-@Composable
-fun Counter(count: Int, onIncrement: () -> Unit) {
-    Button(onClick = onIncrement) {
-        Text("Vous avez cliqué $count fois")
-    }
-}
-
-@Composable
-fun CounterScreen() {
-    var count by rememberSaveable { mutableStateOf(0) }
-    Counter(count = count, onIncrement = { count++ })
-}
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    EmtyAppTheme {
-        Column {
-            Greeting("Android")
-            CounterScreen()
-            LogoCard()
-        }
-
-    }
-}
