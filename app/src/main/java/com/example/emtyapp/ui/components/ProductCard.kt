@@ -12,7 +12,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
-import com.example.emtyapp.model.Product
+import com.example.emtyapp.data.Entities.Product
 
 @Composable
 fun ProductCard(product: Product, onClick: () -> Unit) {

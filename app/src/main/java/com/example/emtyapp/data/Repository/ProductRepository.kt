@@ -1,6 +1,6 @@
-package com.example.emtyapp.data
+package com.example.emtyapp.data.Repository
 import com.example.emtyapp.R
-import com.example.emtyapp.model.Product
+import com.example.emtyapp.data.Entities.Product
 
 val sampleProducts = listOf(
     Product("PR001", "Hp Revolution 6", 379.0, 619.0, imageResId = R.drawable.a),
