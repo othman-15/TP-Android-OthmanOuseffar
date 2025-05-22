@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
+
+
 }
 
 android {
@@ -43,6 +47,7 @@ dependencies {
     val nav_version = "2.8.9"
     implementation("io.coil-kt:coil-compose:2.4.0")
 
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -53,7 +58,9 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
-
+    implementation("com.google.dagger:hilt-android:2.56.1")
+    ksp("com.google.dagger:hilt-compiler:2.56.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

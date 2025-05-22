@@ -43,8 +43,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.emtyapp.nav.AppNavigation
 import com.example.emtyapp.nav.Routes
 import com.example.emtyapp.ui.theme.EmtyAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

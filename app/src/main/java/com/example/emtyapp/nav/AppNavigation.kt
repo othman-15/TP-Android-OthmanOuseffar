@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.emtyapp.ui.screens.home.HomeScreen
-import com.example.emtyapp.ui.screens.DetailsScreen
+import com.example.emtyapp.ui.screens.details.DetailsScreen
 
 object Routes {
     const val Home = "home"
