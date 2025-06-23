@@ -1,41 +1,27 @@
 package com.example.emtyapp.nav
 
+import DetailsProductScreen
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.emtyapp.ui.screens.home.HomeScreen
-import com.example.emtyapp.ui.screens.DetailsScreen
+import com.example.emtyapp.ui.product.screens.HomeScreen
 
-object Routes {
-    const val Home = "home"
-    const val ProductDetails = "productDetails"
-}
 
 @Composable
-fun AppNavigation() {
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = Routes.Home) {
-
-        composable(Routes.Home) {
-            HomeScreen(onNavigateToDetails = { productId ->
-                navController.navigate("${Routes.ProductDetails}/$productId")
-            })
+fun AppNavigation(navController: NavHostController) {
+    NavHost(navController, startDestination = "home") {
+        composable("home") {
+            HomeScreen(navController = navController)
         }
-
-
         composable(
-            "${Routes.ProductDetails}/{productId}",
+            "details/{productId}",
             arguments = listOf(navArgument("productId") { type = NavType.StringType })
         ) { backStackEntry ->
-            val productId = backStackEntry.arguments?.getString("productId") ?: ""
-
-            DetailsScreen(
-                productId = productId,
-                onBack = { navController.popBackStack() }
+            DetailsProductScreen(
+                productId = backStackEntry.arguments?.getString("productId").toString()
             )
         }
     }
