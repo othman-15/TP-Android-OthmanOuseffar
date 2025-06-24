@@ -1,0 +1,45 @@
+package com.example.emtyapp.ui.product.components
+
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
+
+data class BottomNavItem(
+    val route: String,
+    val icon: ImageVector
+)
+
+val bottomNavItems = listOf(
+    BottomNavItem("home", Icons.Default.Home),
+    BottomNavItem("cart", Icons.Default.ShoppingCart),
+    BottomNavItem("profile", Icons.Default.Person),
+    BottomNavItem("search", Icons.Default.Search)
+)
+
+@Composable
+fun BottomBar(navController: NavController) {
+    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+
+    NavigationBar {
+        bottomNavItems.forEach { item ->
+            NavigationBarItem(
+                icon = { Icon(imageVector = item.icon, contentDescription = null) },
+                selected = currentRoute == item.route,
+                onClick = {
+                    if (currentRoute != item.route) {
+                        navController.navigate(item.route) {
+                            popUpTo("home") { inclusive = false }
+                            launchSingleTop = true
+                        }
+                    }
+                }
+            )
+        }
+    }
+}

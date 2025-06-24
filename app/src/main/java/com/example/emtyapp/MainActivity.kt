@@ -44,6 +44,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.emtyapp.nav.AppNavigation
 import com.example.emtyapp.ui.product.screens.HomeScreen
+import com.example.emtyapp.ui.product.screens.MainScreen
 
 import com.example.emtyapp.ui.theme.EmtyAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,17 +55,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-
-            NavHost(navController, startDestination = "home") {
-                composable("home") { HomeScreen(navController) }
-                composable("details/{productId}") { backStackEntry ->
-                    val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
-                    DetailsProductScreen(
-                        productId = productId,
-                        onBackClick = { navController.popBackStack() }
-                    )
-                }
-            }
+            MainScreen(navController = navController)
         }
     }
 }
