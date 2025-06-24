@@ -46,8 +46,9 @@ import com.example.emtyapp.nav.AppNavigation
 import com.example.emtyapp.ui.product.screens.HomeScreen
 
 import com.example.emtyapp.ui.theme.EmtyAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +59,10 @@ class MainActivity : ComponentActivity() {
                 composable("home") { HomeScreen(navController) }
                 composable("details/{productId}") { backStackEntry ->
                     val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
-                    DetailsProductScreen(productId)
+                    DetailsProductScreen(
+                        productId = productId,
+                        onBackClick = { navController.popBackStack() }
+                    )
                 }
             }
         }

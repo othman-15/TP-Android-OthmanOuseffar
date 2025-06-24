@@ -1,8 +1,10 @@
 package com.example.emtyapp.data.Repository
 import com.example.emtyapp.R
 import com.example.emtyapp.data.Entities.Product
-class ProductRepository {
-    fun getProducts(): List<Product> =listOf(
+import jakarta.inject.Inject
+
+class ProductRepository @Inject constructor() {
+    suspend fun getProducts(): List<Product> =listOf(
         Product("PR001", "Hp Revolution 6", 379.0,"zd", 619.0, imageResId = R.drawable.a,"pc"),
         Product("PR002", "Robot de Cuisine", 699.0,"zd", 900.0, R.drawable.b,"pc"),
         Product("PR003", "Hp-Pavilon", 219.0,"zd", 272.0, R.drawable.c,"pc"),

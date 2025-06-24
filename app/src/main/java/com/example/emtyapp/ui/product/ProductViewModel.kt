@@ -6,16 +6,20 @@ import com.example.emtyapp.data.Entities.Product
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import com.example.emtyapp.data.Repository.ProductRepository  // ✅ Correct
+import com.example.emtyapp.data.Repository.ProductRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.update
-
-class ProductViewModel(
-    private val repository: ProductRepository = ProductRepository()
+@HiltViewModel
+class ProductViewModel @Inject constructor(
+    private val repository: ProductRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<ProductViewState>(ProductViewState.Loading)
     val state: StateFlow<ProductViewState> = _state
-
+    suspend fun getProductById(id: String): Product? {
+        return repository.getProducts().find { it.id == id }
+    }
     fun handleIntent(intent: ProductIntent) {
         when (intent) {
             is ProductIntent.LoadProducts -> loadProducts()

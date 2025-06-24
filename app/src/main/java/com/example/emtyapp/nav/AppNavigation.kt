@@ -20,8 +20,11 @@ fun AppNavigation(navController: NavHostController) {
             "details/{productId}",
             arguments = listOf(navArgument("productId") { type = NavType.StringType })
         ) { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
+
             DetailsProductScreen(
-                productId = backStackEntry.arguments?.getString("productId").toString()
+                productId = productId,
+                onBackClick = { navController.popBackStack() }
             )
         }
     }

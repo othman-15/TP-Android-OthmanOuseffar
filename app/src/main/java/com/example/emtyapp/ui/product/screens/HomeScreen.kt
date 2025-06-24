@@ -17,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.emtyapp.ui.product.ProductIntent
@@ -28,7 +29,7 @@ import com.example.emtyapp.ui.product.components.ProductsComponent
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: ProductViewModel = viewModel()
+    viewModel: ProductViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -60,7 +61,6 @@ fun HomeScreen(
                         navController.navigate("details/$productId")
                     },
                     onAddToCart = { product ->
-                        // TODO: Intégrer panier ici (par ex. viewModel.addToCart(product))
                         println("Ajouté au panier : ${product.name}")
                     },
                     modifier = Modifier.padding(padding)
