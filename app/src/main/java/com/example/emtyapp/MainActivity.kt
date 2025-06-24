@@ -54,8 +54,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
-            MainScreen(navController = navController)
+            EmtyAppTheme(
+                darkTheme = false,
+                dynamicColor = false
+            ) {
+                val navController = rememberNavController()
+                MainScreen(navController = navController)
+            }
         }
     }
 }
