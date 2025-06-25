@@ -8,5 +8,7 @@ data class Product(
     val oldPrice: Double,
     val imageResId: Int,
     val categorie: String? = null,
+    val coleur :String?=null
+
 
 )

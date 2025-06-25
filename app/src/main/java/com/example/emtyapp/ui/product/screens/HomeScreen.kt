@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.emtyapp.ui.cart.CartIntent
+import com.example.emtyapp.ui.cart.CartViewModel
 import com.example.emtyapp.ui.product.ProductIntent
 import com.example.emtyapp.ui.product.ProductViewModel
 import com.example.emtyapp.ui.product.ProductViewState
@@ -32,7 +34,8 @@ import com.example.emtyapp.ui.product.components.ProductsComponent
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: ProductViewModel = hiltViewModel()
+    viewModel: ProductViewModel = hiltViewModel(),
+            cartViewModel: CartViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
     var searchQuery by remember { mutableStateOf("") }
@@ -92,8 +95,8 @@ fun HomeScreen(
                                 navController.navigate("details/$productId")
                             },
                             onAddToCart = { product ->
-                                println("Ajouté au panier : ${product.name}")
 
+                                cartViewModel.handleIntent(CartIntent.AddToCart(product))
                             }
                         )
                     }
@@ -370,7 +373,7 @@ private fun LoadingContent() {
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Nous préparons le meilleur pour vous ✨",
+                text = "Nous préparons le meilleur pour vous ",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
                 textAlign = TextAlign.Center
@@ -422,7 +425,7 @@ private fun ErrorContent(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Oups ! Une erreur s'est produite",
+                    text = " Une erreur s'est produite",
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold
                     ),

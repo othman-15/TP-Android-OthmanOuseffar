@@ -12,7 +12,6 @@ import androidx.navigation.compose.composable
 import com.example.emtyapp.ui.product.components.BottomBar
 import com.example.emtyapp.ui.product.screens.*
 
-
 @Composable
 fun MainScreen(navController: NavHostController) {
     Scaffold(
@@ -23,7 +22,7 @@ fun MainScreen(navController: NavHostController) {
         Box(modifier = Modifier.padding(innerPadding)) {
             NavHost(navController = navController, startDestination = "home") {
                 composable("home") { HomeScreen(navController) }
-                composable("cart") { CartScreen() }
+                composable("cart") { CartScreen(navController) }
                 composable("profile") { ProfileScreen() }
                 composable("search") { SearchScreen() }
                 composable("details/{productId}") { backStackEntry ->

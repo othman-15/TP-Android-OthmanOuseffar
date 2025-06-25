@@ -31,6 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.emtyapp.data.Entities.Product
+import com.example.emtyapp.ui.cart.CartIntent
+import com.example.emtyapp.ui.cart.CartViewModel
 import com.example.emtyapp.ui.product.ProductViewModel
 import kotlinx.coroutines.launch
 
@@ -39,6 +41,7 @@ import kotlinx.coroutines.launch
 fun DetailsProductScreen(
     productId: String,
     viewModel: ProductViewModel = hiltViewModel(),
+    cartViewModel: CartViewModel = hiltViewModel(),
     onBackClick: () -> Unit
 ) {
     var productState by remember { mutableStateOf<Product?>(null) }
@@ -47,6 +50,12 @@ fun DetailsProductScreen(
     var isFavorite by remember { mutableStateOf(false) }
     var quantity by remember { mutableStateOf(1) }
     var isAddingToCart by remember { mutableStateOf(false) }
+
+    // ✅ Ajouter un état pour afficher un message de succès
+    var showSuccessMessage by remember { mutableStateOf(false) }
+
+    // ✅ Observer l'état du panier pour détecter l'ajout réussi
+    val cartState by cartViewModel.state.collectAsState()
 
     LaunchedEffect(productId) {
         try {
@@ -57,6 +66,14 @@ fun DetailsProductScreen(
             errorState = "Erreur de chargement du produit"
         } finally {
             isLoading = false
+        }
+    }
+
+    // ✅ Gérer l'affichage du message de succès
+    LaunchedEffect(showSuccessMessage) {
+        if (showSuccessMessage) {
+            kotlinx.coroutines.delay(2000) // Afficher pendant 2 secondes
+            showSuccessMessage = false
         }
     }
 
@@ -105,14 +122,39 @@ fun DetailsProductScreen(
                     isAddingToCart = isAddingToCart,
                     onQuantityChange = { quantity = it },
                     onAddToCart = {
+                        // ✅ Vraiment ajouter au panier via le CartViewModel
                         isAddingToCart = true
 
+                        // Ajouter le produit au panier avec la quantité sélectionnée
+                        repeat(quantity) {
+                            cartViewModel.handleIntent(CartIntent.AddToCart(productState!!))
+                        }
+
+                        // Simuler un délai pour l'UX
                         kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.Main).launch {
-                            kotlinx.coroutines.delay(1500)
+                            kotlinx.coroutines.delay(1000)
                             isAddingToCart = false
+                            showSuccessMessage = true
                         }
                     }
                 )
+            }
+        },
+        // ✅ Ajouter un Snackbar pour le message de succès
+        snackbarHost = {
+            if (showSuccessMessage) {
+                Snackbar(
+                    modifier = Modifier.padding(16.dp),
+                    action = {
+                        TextButton(onClick = { showSuccessMessage = false }) {
+                            Text("OK", color = Color.White)
+                        }
+                    },
+                    containerColor = Color(0xFF4CAF50),
+                    contentColor = Color.White
+                ) {
+                    Text("✅ Produit ajouté au panier avec succès!")
+                }
             }
         }
     ) { paddingValues ->
@@ -157,36 +199,20 @@ private fun ProductDetailsContent(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-
         ImageGallery(product = product)
-
 
         Column(
             modifier = Modifier.padding(20.dp)
         ) {
-
             ProductHeader(product = product)
-
             Spacer(modifier = Modifier.height(16.dp))
-
-
             PriceSection(product = product)
-
             Spacer(modifier = Modifier.height(20.dp))
-
-
             RatingSection()
-
             Spacer(modifier = Modifier.height(20.dp))
-
-
             DescriptionSection(product = product)
-
             Spacer(modifier = Modifier.height(20.dp))
-
-
             SpecificationSection()
-
             Spacer(modifier = Modifier.height(100.dp)) // Espace pour la bottom bar
         }
     }
@@ -194,7 +220,6 @@ private fun ProductDetailsContent(
 
 @Composable
 private fun ImageGallery(product: Product) {
-
     val images = listOf(
         product.imageResId,
         product.imageResId,
@@ -219,7 +244,6 @@ private fun ImageGallery(product: Product) {
             )
         }
 
-
         Row(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -240,7 +264,6 @@ private fun ImageGallery(product: Product) {
                 )
             }
         }
-
 
         if (product.oldPrice > product.price) {
             val discount = ((product.oldPrice - product.price) / product.oldPrice * 100).toInt()
@@ -335,7 +358,6 @@ private fun PriceSection(product: Product) {
                 }
             }
 
-
             Box(
                 modifier = Modifier
                     .background(
@@ -365,7 +387,6 @@ private fun RatingSection() {
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Étoiles
             Row(verticalAlignment = Alignment.CenterVertically) {
                 repeat(5) { index ->
                     Icon(
@@ -387,7 +408,6 @@ private fun RatingSection() {
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Nombre d'avis
             TextButton(onClick = {  }) {
                 Text("127 avis")
                 Icon(
@@ -503,6 +523,7 @@ private fun SpecificationSection() {
     }
 }
 
+// ✅ Modifier BottomActionBar pour mieux gérer l'ajout au panier
 @Composable
 private fun BottomActionBar(
     product: Product,
@@ -523,7 +544,7 @@ private fun BottomActionBar(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
+            // Sélecteur de quantité
             Card(
                 shape = RoundedCornerShape(12.dp),
                 colors = CardDefaults.cardColors(
@@ -556,35 +577,49 @@ private fun BottomActionBar(
                 }
             }
 
-
+            // Bouton d'ajout au panier
             Button(
                 onClick = onAddToCart,
                 modifier = Modifier.weight(1f),
                 enabled = !isAddingToCart,
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary
+                    containerColor = if (isAddingToCart)
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+                    else
+                        MaterialTheme.colorScheme.primary
                 )
             ) {
-                if (isAddingToCart) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(20.dp),
-                        strokeWidth = 2.dp,
-                        color = Color.White
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("Ajout...")
-                } else {
-                    Icon(
-                        Icons.Default.ShoppingCart,
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        "Ajouter • ${product.price * quantity} DH",
-                        fontWeight = FontWeight.Bold
-                    )
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    if (isAddingToCart) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(18.dp),
+                            strokeWidth = 2.dp,
+                            color = Color.White
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            "Ajout en cours...",
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    } else {
+                        Icon(
+                            Icons.Default.ShoppingCart,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp),
+                            tint = Color.White
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            "Ajouter ${if (quantity > 1) "($quantity)" else ""} • ${product.price * quantity} DH",
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
                 }
             }
         }
