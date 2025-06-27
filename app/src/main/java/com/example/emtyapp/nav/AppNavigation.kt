@@ -7,7 +7,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.emtyapp.ui.product.screens.CartScreen
 import com.example.emtyapp.ui.product.screens.HomeScreen
+import com.example.emtyapp.ui.product.screens.ProfileScreen
 
 
 @Composable
@@ -15,6 +17,13 @@ fun AppNavigation(navController: NavHostController) {
     NavHost(navController, startDestination = "home") {
         composable("home") {
             HomeScreen(navController = navController)
+        }
+        composable("cart") {
+            CartScreen(navController = navController)
+        }
+
+        composable("profile") {
+            ProfileScreen()
         }
         composable(
             "details/{productId}",

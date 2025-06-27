@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -61,6 +62,15 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.56.1")
     ksp("com.google.dagger:hilt-compiler:2.56.1")
     implementation ("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
+
+    // OkHttp pour le logging
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+    // Kotlinx Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

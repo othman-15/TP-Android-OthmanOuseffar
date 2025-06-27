@@ -1,25 +1,24 @@
 package com.example.emtyapp.ui.cart
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
-
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.emtyapp.data.Entities.CartItem
 
 @Composable
@@ -45,23 +44,24 @@ fun CartItemComponent(
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Product Image
+
             Box(
                 modifier = Modifier
                     .size(80.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .background(MaterialTheme.colorScheme.surfaceVariant)
             ) {
-                Image(
-                    painter = painterResource(id = cartItem.product.imageResId),
+                AsyncImage(
+                    model = cartItem.product.imageUrl,
                     contentDescription = cartItem.product.name,
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
                 )
             }
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            // Product Details
+
             Column(
                 modifier = Modifier.weight(1f)
             ) {
@@ -75,6 +75,7 @@ fun CartItemComponent(
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
+
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically
@@ -100,48 +101,59 @@ fun CartItemComponent(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Quantity Controls
+
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
-                    IconButton(
+                    OutlinedIconButton(
                         onClick = {
                             if (cartItem.quantity > 1) {
                                 onQuantityChange(cartItem.quantity - 1)
                             }
                         },
-                        modifier = Modifier.size(32.dp)
+                        modifier = Modifier.size(32.dp),
+                        enabled = cartItem.quantity > 1
                     ) {
                         Icon(
-                            Icons.Default.Close,
+                            Icons.Default.Clear,
                             contentDescription = "Diminuer",
-                            tint = MaterialTheme.colorScheme.primary
+                            modifier = Modifier.size(16.dp)
                         )
                     }
 
 
-                    Text(
-                        text = cartItem.quantity.toString(),
-                        style = MaterialTheme.typography.titleMedium.copy(
-                            fontWeight = FontWeight.Bold
-                        ),
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
+                    Surface(
+                        modifier = Modifier
+                            .padding(horizontal = 12.dp)
+                            .widthIn(min = 40.dp),
+                        shape = RoundedCornerShape(4.dp),
+                        color = MaterialTheme.colorScheme.surfaceVariant
+                    ) {
+                        Text(
+                            text = cartItem.quantity.toString(),
+                            style = MaterialTheme.typography.titleMedium.copy(
+                                fontWeight = FontWeight.Bold
+                            ),
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                        )
+                    }
 
 
-                    IconButton(
+                    OutlinedIconButton(
                         onClick = { onQuantityChange(cartItem.quantity + 1) },
                         modifier = Modifier.size(32.dp)
                     ) {
                         Icon(
                             Icons.Default.Add,
                             contentDescription = "Augmenter",
-                            tint = MaterialTheme.colorScheme.primary
+                            modifier = Modifier.size(16.dp)
                         )
                     }
                 }
             }
+
+            Spacer(modifier = Modifier.width(8.dp))
 
 
             Column(
@@ -159,8 +171,9 @@ fun CartItemComponent(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
+
                 Text(
-                    text = "${cartItem.totalPrice}€",
+                    text = "%.2f€".format(cartItem.product.price * cartItem.quantity),
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold
                     ),

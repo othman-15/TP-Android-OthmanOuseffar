@@ -1,16 +1,41 @@
 package com.example.emtyapp.data.Repository
-import com.example.emtyapp.R
 import com.example.emtyapp.data.Entities.Product
-import jakarta.inject.Inject
+import com.example.emtyapp.data.api.ApiService
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class ProductRepository @Inject constructor() {
-    suspend fun getProducts(): List<Product> =listOf(
-        Product("PR001", "Hp Revolution 6", 379.0,"zd", 619.0, imageResId = R.drawable.a,"pc"),
-        Product("PR002", "Robot de Cuisine", 699.0,"zd", 900.0, R.drawable.b,"pc"),
-        Product("PR003", "Hp-Pavilon", 219.0,"zd", 272.0, R.drawable.c,"pc"),
-        Product("PR006", "Hp-impriment", 379.0,"zd", 619.0, imageResId = R.drawable.d,"pc"),
-        Product("PR007", "Mac-book air", 699.0,"zd", 900.0, R.drawable.emac,"pc"),
-        Product("PR008", "Hp-mouse", 219.0,"zd", 272.0, R.drawable.fmouse,"pc"),
+@Singleton
+class ProductRepository @Inject constructor(
+    private val apiService: ApiService
+) {
 
-        )
+    suspend fun getProducts(): Result<List<Product>> {
+        return try {
+            val response = apiService.getProducts()
+            if (response.isSuccessful) {
+                response.body()?.let { products ->
+                    Result.success(products)
+                } ?: Result.failure(Exception("Données vides"))
+            } else {
+                Result.failure(Exception("Erreur HTTP: ${response.code()}"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getProductById(id: String): Result<Product> {
+        return try {
+            val response = apiService.getProductById(id)
+            if (response.isSuccessful) {
+                response.body()?.let { product ->
+                    Result.success(product)
+                } ?: Result.failure(Exception("Produit non trouvé"))
+            } else {
+                Result.failure(Exception("Erreur HTTP: ${response.code()}"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.emtyapp.ui.cart.CartIntent
+import com.example.emtyapp.ui.cart.CartIntent.*
 import com.example.emtyapp.ui.cart.CartItemComponent
 import com.example.emtyapp.ui.cart.CartViewModel
 import com.example.emtyapp.ui.cart.CartViewState
@@ -109,13 +111,13 @@ fun CartScreen(
                 is CartViewState.CartLoaded -> {
                     CartContent(
                         items = currentState.items,
-                        totalPrice = currentState.totalPrice,
-                        itemsCount = currentState.itemsCount,
+                        totalPrice = currentState.total,
+                        itemsCount = currentState.items.count(),
                         onQuantityChange = { cartItemId, quantity ->
-                            viewModel.handleIntent(CartIntent.UpdateQuantity(cartItemId, quantity))
+                            viewModel.handleIntent(UpdateQuantity(cartItemId, quantity))
                         },
                         onRemoveItem = { cartItemId ->
-                            viewModel.handleIntent(CartIntent.RemoveItem(cartItemId))
+                            viewModel.handleIntent(RemoveItem(cartItemId))
                         },
                         onCheckout = {
                             viewModel.handleIntent(CartIntent.Checkout)
@@ -135,6 +137,17 @@ fun CartScreen(
                 is CartViewState.CheckoutSuccess -> {
                     CheckoutSuccessContent(
                         onContinueShopping = { navController.popBackStack() },
+                        modifier = Modifier.padding(paddingValues)
+                    )
+                }
+
+                is CartViewState.NotLoggedIn -> {
+                    NotLoggedInContent(
+                        onLogin = {
+
+                            navController.navigate("profile")
+                        },
+                        onBack = { navController.popBackStack() },
                         modifier = Modifier.padding(paddingValues)
                     )
                 }
@@ -162,15 +175,13 @@ private fun CartContent(
             contentPadding = PaddingValues(vertical = 8.dp)
         ) {
 
-            items(items, key = { it.product.id }) { cartItem ->
+            items(items, key = { it.id }) { cartItem ->
                 CartItemComponent(
                     cartItem = cartItem,
                     onQuantityChange = { quantity ->
-
-                        onQuantityChange(cartItem.product.id, quantity)
+                        onQuantityChange(cartItem.id, quantity)
                     },
-
-                    onRemove = { onRemoveItem(cartItem.product.id) }
+                    onRemove = { onRemoveItem(cartItem.id) }
                 )
             }
 
@@ -178,7 +189,6 @@ private fun CartContent(
                 Spacer(modifier = Modifier.height(100.dp))
             }
         }
-
 
         Surface(
             modifier = Modifier.fillMaxWidth(),
@@ -207,7 +217,6 @@ private fun CartContent(
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
-
 
                 Button(
                     onClick = onCheckout,
@@ -273,6 +282,71 @@ private fun EmptyCartContent(
         ) {
             Text(
                 "Continuer mes achats",
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            )
+        }
+    }
+}
+
+@Composable
+private fun NotLoggedInContent(
+    onLogin: () -> Unit,
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            Icons.Default.Lock,
+            contentDescription = null,
+            modifier = Modifier.size(120.dp),
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Connexion requise",
+            style = MaterialTheme.typography.headlineSmall.copy(
+                fontWeight = FontWeight.Bold
+            ),
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = "Vous devez être connecté pour accéder à votre panier",
+            style = MaterialTheme.typography.bodyLarge,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Button(
+            onClick = onLogin,
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Text(
+                "Se connecter",
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedButton(
+            onClick = onBack,
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Text(
+                "Retour",
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
             )
         }

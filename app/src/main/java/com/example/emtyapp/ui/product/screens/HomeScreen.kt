@@ -35,7 +35,7 @@ import com.example.emtyapp.ui.product.components.ProductsComponent
 fun HomeScreen(
     navController: NavController,
     viewModel: ProductViewModel = hiltViewModel(),
-            cartViewModel: CartViewModel = hiltViewModel()
+    cartViewModel: CartViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
     var searchQuery by remember { mutableStateOf("") }
@@ -54,14 +54,18 @@ fun HomeScreen(
                     onSearchClose = {
                         isSearchActive = false
                         searchQuery = ""
+                        // Reset to all products when search is closed
+                        viewModel.handleIntent(ProductIntent.LoadProducts)
                     },
-                    onSearch = {  }
+                    onSearch = { query ->
+                        viewModel.handleIntent(ProductIntent.SearchProducts(query))
+                    }
                 )
             } else {
                 MainTopBar(
                     onSearchClick = { isSearchActive = true },
                     onNotificationClick = {  },
-                    onCartClick = {  }
+                    onCartClick = { navController.navigate("cart") }
                 )
             }
         },
@@ -75,13 +79,13 @@ fun HomeScreen(
 
             WelcomeBanner()
 
-
             AnimatedContent(
                 targetState = state,
                 transitionSpec = {
                     slideInVertically { it } + fadeIn() togetherWith
                             slideOutVertically { -it } + fadeOut()
-                }
+                },
+                label = "content_animation"
             ) { currentState ->
                 when (currentState) {
                     is ProductViewState.Loading -> {
@@ -95,9 +99,10 @@ fun HomeScreen(
                                 navController.navigate("details/$productId")
                             },
                             onAddToCart = { product ->
-
                                 cartViewModel.handleIntent(CartIntent.AddToCart(product))
-                            }
+                            },
+                            isSearchActive = isSearchActive,
+                            searchQuery = searchQuery
                         )
                     }
 
@@ -148,20 +153,27 @@ private fun MainTopBar(
                 )
             }
 
-
-
-
-            Badge(
-                modifier = Modifier.offset(x = (-4).dp, y = 4.dp)
-            ) {
-                Text("2")
-            }
-            IconButton(onClick = onCartClick) {
+            IconButton(onClick = onNotificationClick) {
                 Icon(
-                    Icons.Default.ShoppingCart,
-                    contentDescription = "Panier",
+                    Icons.Default.Notifications,
+                    contentDescription = "Notifications",
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
+            }
+
+            Box {
+                IconButton(onClick = onCartClick) {
+                    Icon(
+                        Icons.Default.ShoppingCart,
+                        contentDescription = "Panier",
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+                Badge(
+                    modifier = Modifier.offset(x = (-4).dp, y = 4.dp)
+                ) {
+                    Text("2")
+                }
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -182,7 +194,11 @@ private fun SearchTopBar(
         title = {
             OutlinedTextField(
                 value = query,
-                onValueChange = onQueryChange,
+                onValueChange = { newQuery ->
+                    onQueryChange(newQuery)
+
+                    onSearch(newQuery)
+                },
                 placeholder = {
                     Text(
                         "Rechercher un produit...",
@@ -203,7 +219,7 @@ private fun SearchTopBar(
         navigationIcon = {
             IconButton(onClick = onSearchClose) {
                 Icon(
-                    Icons.Default.Search, // Tu peux utiliser ArrowBack si disponible
+                    Icons.Default.Search,
                     contentDescription = "Fermer recherche",
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
@@ -279,12 +295,13 @@ private fun WelcomeBanner() {
 private fun ProductsSection(
     products: List<com.example.emtyapp.data.Entities.Product>,
     onProductClick: (String) -> Unit,
-    onAddToCart: (com.example.emtyapp.data.Entities.Product) -> Unit
+    onAddToCart: (com.example.emtyapp.data.Entities.Product) -> Unit,
+    isSearchActive: Boolean = false,
+    searchQuery: String = ""
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -293,35 +310,87 @@ private fun ProductsSection(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Nos Produits",
+                text = if (isSearchActive && searchQuery.isNotBlank()) {
+                    "Résultats de recherche"
+                } else {
+                    "Nos Produits"
+                },
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold
                 ),
                 color = MaterialTheme.colorScheme.onBackground
             )
 
-            TextButton(onClick = {  }) {
-                Text("Voir tout")
+            if (!isSearchActive) {
+                TextButton(onClick = {  }) {
+                    Text("Voir tout")
+                }
             }
         }
 
-
         Text(
-            text = "${products.size} produits disponibles",
+            text = if (isSearchActive && searchQuery.isNotBlank()) {
+                "${products.size} résultat(s) pour \"$searchQuery\""
+            } else {
+                "${products.size} produits disponibles"
+            },
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
         )
 
+        if (products.isEmpty() && isSearchActive && searchQuery.isNotBlank()) {
+            EmptySearchResults(searchQuery = searchQuery)
+        } else {
+            ProductsComponent(
+                products = products,
+                onProductClick = onProductClick,
+                onAddToCart = onAddToCart,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 8.dp)
+            )
+        }
+    }
+}
 
-        ProductsComponent(
-            products = products,
-            onProductClick = onProductClick,
-            onAddToCart = onAddToCart,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 8.dp)
-        )
+@Composable
+private fun EmptySearchResults(
+    searchQuery: String
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "🔍",
+                style = MaterialTheme.typography.headlineLarge
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "Aucun résultat trouvé",
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Bold
+                ),
+                color = MaterialTheme.colorScheme.onBackground
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = "Aucun produit ne correspond à \"$searchQuery\"",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
 
@@ -337,7 +406,6 @@ private fun LoadingContent() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-
             Box(
                 modifier = Modifier
                     .size(80.dp)
@@ -373,7 +441,7 @@ private fun LoadingContent() {
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Nous préparons le meilleur pour vous ",
+                text = "Nous préparons le meilleur pour vous",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
                 textAlign = TextAlign.Center
@@ -404,7 +472,6 @@ private fun ErrorContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(24.dp)
             ) {
-
                 Box(
                     modifier = Modifier
                         .size(80.dp)
@@ -425,7 +492,7 @@ private fun ErrorContent(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = " Une erreur s'est produite",
+                    text = "Une erreur s'est produite",
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold
                     ),

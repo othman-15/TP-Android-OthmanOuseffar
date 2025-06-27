@@ -24,12 +24,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.emtyapp.data.Entities.Product
 import com.example.emtyapp.ui.cart.CartIntent
 import com.example.emtyapp.ui.cart.CartViewModel
@@ -213,7 +216,7 @@ private fun ProductDetailsContent(
             DescriptionSection(product = product)
             Spacer(modifier = Modifier.height(20.dp))
             SpecificationSection()
-            Spacer(modifier = Modifier.height(100.dp)) // Espace pour la bottom bar
+            Spacer(modifier = Modifier.height(100.dp))
         }
     }
 }
@@ -221,9 +224,8 @@ private fun ProductDetailsContent(
 @Composable
 private fun ImageGallery(product: Product) {
     val images = listOf(
-        product.imageResId,
-        product.imageResId,
-        product.imageResId
+        product.imageUrl,
+
     )
     val pagerState = rememberPagerState(pageCount = { images.size })
 
@@ -236,12 +238,18 @@ private fun ImageGallery(product: Product) {
             state = pagerState,
             modifier = Modifier.fillMaxSize()
         ) { page ->
-            Image(
-                painter = painterResource(id = images[page]),
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(images[page])
+                    .crossfade(true)
+                    .build(),
                 contentDescription = product.name,
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(0.dp)),
                 contentScale = ContentScale.Crop
             )
+
         }
 
         Row(
@@ -523,7 +531,7 @@ private fun SpecificationSection() {
     }
 }
 
-// ✅ Modifier BottomActionBar pour mieux gérer l'ajout au panier
+
 @Composable
 private fun BottomActionBar(
     product: Product,

@@ -1,6 +1,5 @@
 package com.example.emtyapp.ui.product.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -16,12 +15,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.emtyapp.data.Entities.Product
 import kotlinx.coroutines.launch
 
@@ -54,8 +55,11 @@ fun ProductItemComponent(
                     .fillMaxWidth()
                     .height(160.dp)
             ) {
-                Image(
-                    painter = painterResource(id = product.imageResId),
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(product.imageUrl)
+                        .crossfade(true)
+                        .build(),
                     contentDescription = product.name,
                     modifier = Modifier
                         .fillMaxSize()
@@ -104,6 +108,16 @@ fun ProductItemComponent(
             Spacer(modifier = Modifier.height(4.dp))
 
 
+            product.categorie?.let { category ->
+                Text(
+                    text = category,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+            }
+
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
@@ -132,7 +146,7 @@ fun ProductItemComponent(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "${product.price} DH",
+                    text = "${String.format("%.2f", product.price)} DH",
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold
                     ),
@@ -142,7 +156,7 @@ fun ProductItemComponent(
                 if (product.oldPrice > product.price) {
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "${product.oldPrice} DH",
+                        text = "${String.format("%.2f", product.oldPrice)} DH",
                         style = MaterialTheme.typography.bodySmall.copy(
                             textDecoration = TextDecoration.LineThrough,
                             color = Color(0xFF757575)
@@ -196,5 +210,3 @@ fun ProductItemComponent(
         }
     }
 }
-
-

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1003405095123",
+    "project_id": "ecomerce-app-53b1c",
+    "storage_bucket": "ecomerce-app-53b1c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003405095123:android:2c83a475579287c5a1a426",
+        "android_client_info": {
+          "package_name": "com.example.emtyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFitCIhoQWN_-qKRTvjYnJxl2ZsaL6f5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

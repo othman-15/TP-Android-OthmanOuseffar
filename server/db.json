@@ -1,0 +1,194 @@
+{
+  "products": [
+    {
+      "id": "PR001",
+      "name": "Hp Revolution 6",
+      "price": 379,
+      "description": "Ordinateur portable HP performant",
+      "oldPrice": 619,
+      "imageUrl": "https://via.placeholder.com/300x200/007bff/ffffff?text=HP+Revolution+6",
+      "categorie": "pc",
+      "coleur": "noir"
+    },
+    {
+      "id": "PR002",
+      "name": "Robot de Cuisine",
+      "price": 699,
+      "description": "Robot multifonction pour cuisine",
+      "oldPrice": 900,
+      "imageUrl": "https://via.placeholder.com/300x200/28a745/ffffff?text=Robot+Cuisine",
+      "categorie": "electromenager",
+      "coleur": "blanc"
+    },
+    {
+      "id": "PR003",
+      "name": "Hp-Pavilon",
+      "price": 219,
+      "description": "Ordinateur portable HP économique",
+      "oldPrice": 272,
+      "imageUrl": "https://via.placeholder.com/300x200/dc3545/ffffff?text=HP+Pavilion",
+      "categorie": "pc",
+      "coleur": "argent"
+    },
+    {
+      "id": "PR006",
+      "name": "Hp-imprimante",
+      "price": 379,
+      "description": "Imprimante HP multifonction",
+      "oldPrice": 619,
+      "imageUrl": "https://www.bureau-vallee.fr/fstrz/r/s/dxbyzx5id4chj.cloudfront.net/fit-in/815x815/filters:fill(fff)/pub/media/catalog/product/7/9/3/8/5/1/P_79385187_1.jpg",
+      "categorie": "peripherique",
+      "coleur": "noir"
+    },
+    {
+      "id": "PR007",
+      "name": "Mac-book air",
+      "price": 699,
+      "description": "MacBook Air Apple",
+      "oldPrice": 900,
+      "imageUrl": "https://www.lifewire.com/thmb/WKv1B2Cr8bQS7yhS_btM1HKx5Jc=/850x850/filters:no_upscale():max_bytes(150000):strip_icc()/_hero_horiz_MacBook-Air-M1-2020-Computer-1-030783bfc1ec44f6be220018b3b89239.jpg",
+      "categorie": "pc",
+      "coleur": "gris"
+    },
+    {
+      "id": "PR008",
+      "name": "Hp-mouse",
+      "price": 219,
+      "description": "Souris HP ergonomique",
+      "oldPrice": 272,
+      "imageUrl": "https://via.placeholder.com/300x200/17a2b8/ffffff?text=HP+Mouse",
+      "categorie": "peripherique",
+      "coleur": "noir"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "nom": "Dupont",
+      "prenom": "Jean",
+      "email": "jean.dupont@email.com",
+      "password": "password123",
+      "phone": "0612345678",
+      "address": "123 Rue de la Paix, Paris"
+    },
+    {
+      "id": "d207",
+      "nom": "othman",
+      "prenom": "othman",
+      "email": "o@gmail.com",
+      "password": "123456",
+      "phone": "0654020147",
+      "address": "ajajja"
+    },
+    {
+      "id": "b3bb",
+      "nom": "so",
+      "prenom": "so",
+      "email": "so@gmail.com",
+      "password": "123456",
+      "phone": "0654010404",
+      "address": "el jadida"
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "userId": "1",
+      "products": [
+        {
+          "productId": "PR001",
+          "quantity": 1,
+          "price": 379
+        }
+      ],
+      "shippingAddress": "456 Avenue des Champs, Lyon",
+      "total": 379,
+      "date": "2025-06-27T10:00:00Z",
+      "status": "pending"
+    },
+    {
+      "id": "fa5e",
+      "userId": "1",
+      "products": [
+        {
+          "productId": "PR001",
+          "quantity": 2,
+          "price": 379
+        },
+        {
+          "productId": "PR007",
+          "quantity": 1,
+          "price": 699
+        },
+        {
+          "productId": "PR008",
+          "quantity": 1,
+          "price": 219
+        }
+      ],
+      "shippingAddress": "456 Avenue des Champs, Lyon",
+      "total": 1676,
+      "date": "1750994708043"
+    },
+    {
+      "id": "1481",
+      "userId": "1",
+      "products": [
+        {
+          "productId": "PR007",
+          "quantity": 1,
+          "price": 699
+        }
+      ],
+      "shippingAddress": "456 Avenue des Champs, Lyon",
+      "total": 699,
+      "date": "1750997703768"
+    },
+    {
+      "id": "16d1",
+      "userId": "1",
+      "products": [
+        {
+          "productId": "PR002",
+          "quantity": 1,
+          "price": 699
+        }
+      ],
+      "shippingAddress": "456 Avenue des Champs, Lyon",
+      "total": 699,
+      "date": "1751035386282"
+    },
+    {
+      "id": "5608",
+      "userId": "b3bb",
+      "products": [
+        {
+          "productId": "PR006",
+          "quantity": 2,
+          "price": 379
+        },
+        {
+          "productId": "PR007",
+          "quantity": 2,
+          "price": 699
+        }
+      ],
+      "shippingAddress": "el jadida",
+      "total": 2156,
+      "date": "1751036860807"
+    }
+  ],
+  "favorites": [
+    {
+      "id": "1",
+      "userId": "1",
+      "productId": "PR001"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "productId": "PR007"
+    }
+  ],
+  "cart": []
+}

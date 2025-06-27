@@ -2,5 +2,6 @@ package com.example.emtyapp.ui.product
 
 sealed class ProductIntent {
     object LoadProducts : ProductIntent()
-    data class SelectProduct(val productId: String) : ProductIntent()
+    object RefreshProducts : ProductIntent()
+    data class SearchProducts(val query: String) : ProductIntent()
 }
