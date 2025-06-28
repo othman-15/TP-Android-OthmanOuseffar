@@ -48,11 +48,43 @@ interface ApiService {
 
     @DELETE("cart")
     suspend fun clearCart(@Query("userId") userId: String): Response<Unit>
-
-
     @POST("orders")
     suspend fun createOrder(@Body order: Order): Response<Order>
 
+
     @GET("orders")
-    suspend fun getOrders(@Query("userId") userId: String): Response<List<Order>>
+    suspend fun getAllOrders(): Response<List<Order>>
+
+    // Alternative endpoint that might work better with your current API structure
+    @GET("orders/user/{userId}")
+    suspend fun getUserOrders(@Path("userId") userId: String): Response<List<Order>>
+
+    // Cancel order
+    @PUT("orders/{orderId}/cancel")
+    suspend fun cancelOrder(@Path("orderId") orderId: String): Response<ApiResponse>
+
+    // Reorder items
+    @POST("orders/{orderId}/reorder")
+    suspend fun reorderItems(@Path("orderId") orderId: String): Response<Order>
+
+    // Update order status
+    @PUT("orders/{orderId}/status")
+    suspend fun updateOrderStatus(
+        @Path("orderId") orderId: String,
+        @Body status: OrderStatusUpdate
+    ): Response<ApiResponse>
+}
+suspend fun ApiService.getUserOrdersFiltered(userId: String): Response<List<Order>> {
+    return try {
+        val allOrdersResponse = getAllOrders()
+        if (allOrdersResponse.isSuccessful) {
+            val allOrders = allOrdersResponse.body() ?: emptyList()
+            val userOrders = allOrders.filter { it.userId == userId }
+            Response.success(userOrders)
+        } else {
+            allOrdersResponse
+        }
+    } catch (e: Exception) {
+        throw e
+    }
 }

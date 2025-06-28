@@ -10,14 +10,20 @@ import androidx.navigation.navArgument
 import com.example.emtyapp.ui.product.screens.CartScreen
 import com.example.emtyapp.ui.product.screens.HomeScreen
 import com.example.emtyapp.ui.product.screens.ProfileScreen
+import com.example.emtyapp.ui.order.OrdersScreen
 
+import com.example.emtyapp.ui.product.screens.SearchScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
-    NavHost(navController, startDestination = "home") {
+    NavHost(
+        navController = navController,
+        startDestination = "home"
+    ) {
         composable("home") {
             HomeScreen(navController = navController)
         }
+
         composable("cart") {
             CartScreen(navController = navController)
         }
@@ -25,16 +31,53 @@ fun AppNavigation(navController: NavHostController) {
         composable("profile") {
             ProfileScreen()
         }
-        composable(
-            "details/{productId}",
-            arguments = listOf(navArgument("productId") { type = NavType.StringType })
-        ) { backStackEntry ->
-            val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
-
-            DetailsProductScreen(
-                productId = productId,
-                onBackClick = { navController.popBackStack() }
+        composable("orders") {
+            OrdersScreen(
+                onBackClick = {
+                    try {
+                        navController.popBackStack()
+                    } catch (e: Exception) {
+                        println("Error navigating back from orders: ${e.message}")
+                        // En cas d'erreur, retourner à l'écran d'accueil
+                        navController.navigate("home") {
+                            popUpTo(navController.graph.startDestinationId) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                }
             )
+        }
+
+
+        composable(
+            route = "details/{productId}",
+            arguments = listOf(
+                navArgument("productId") {
+                    type = NavType.StringType
+                    nullable = false
+                }
+            )
+        ) { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId")
+
+            if (productId != null) {
+                DetailsProductScreen(
+                    productId = productId,
+                    onBackClick = {
+                        try {
+                            navController.popBackStack()
+                        } catch (e: Exception) {
+                            println("Error navigating back from details: ${e.message}")
+                            navController.navigate("home") {
+                                popUpTo(navController.graph.startDestinationId) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    }
+                )
+            }
         }
     }
 }

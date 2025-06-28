@@ -6,21 +6,10 @@
       "price": 379,
       "description": "Ordinateur portable HP performant",
       "oldPrice": 619,
-      "imageUrl": "https://via.placeholder.com/300x200/007bff/ffffff?text=HP+Revolution+6",
+      "imageUrl": "https://imgs.search.brave.com/sBPRp6t_O-7Q23Q2VCB8B_aNP6jgH6Pse1mWZDfMiV8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzYxbGY2T0FobkxM/LmpwZw",
       "categorie": "pc",
       "coleur": "noir",
       "stock": 15
-    },
-    {
-      "id": "PR002",
-      "name": "Robot de Cuisine",
-      "price": 699,
-      "description": "Robot multifonction pour cuisine",
-      "oldPrice": 900,
-      "imageUrl": "https://via.placeholder.com/300x200/28a745/ffffff?text=Robot+Cuisine",
-      "categorie": "electromenager",
-      "coleur": "blanc",
-      "stock": 8
     },
     {
       "id": "PR003",
@@ -28,7 +17,7 @@
       "price": 219,
       "description": "Ordinateur portable HP économique",
       "oldPrice": 272,
-      "imageUrl": "https://via.placeholder.com/300x200/dc3545/ffffff?text=HP+Pavilion",
+      "imageUrl": "https://imgs.search.brave.com/WyuzYPN0AtZjnaLxbft62ebuj5cho0w89g07c-kceGg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/aHAuY29tL2NvbnRl/bnQvZGFtL3NpdGVz/L3dvcmxkd2lkZS9s/YXB0b3BzLWFuZC0y/LWluLTFzL3Bhdmls/aW9uL0hQX1Bhdmls/aW9uMTZMYXB0b3BJ/bnRlbCVFMiU4MCU4/Ql9Ta3lCbHVlX2Rl/c2t0b3BAMnguanBn",
       "categorie": "pc",
       "coleur": "argent",
       "stock": 22
@@ -39,7 +28,7 @@
       "price": 379,
       "description": "Imprimante HP multifonction",
       "oldPrice": 619,
-      "imageUrl": "https://www.bureau-vallee.fr/fstrz/r/s/dxbyzx5id4chj.cloudfront.net/fit-in/815x815/filters:fill(fff)/pub/media/catalog/product/7/9/3/8/5/1/P_79385187_1.jpg",
+      "imageUrl": "https://5.imimg.com/data5/SELLER/Default/2022/9/TH/VV/OS/130321820/hp-150-wired-mouse-1000x1000.jpg",
       "categorie": "peripherique",
       "coleur": "noir",
       "stock": 5
@@ -61,7 +50,7 @@
       "price": 219,
       "description": "Souris HP ergonomique",
       "oldPrice": 272,
-      "imageUrl": "https://via.placeholder.com/300x200/17a2b8/ffffff?text=HP+Mouse",
+      "imageUrl": "https://imgs.search.brave.com/W1iOTGVSVyd1ErVxUMmYQ5kc-WWXxIdRFG96sPNEkk0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zc2wt/cHJvZHVjdC1pbWFn/ZXMud3d3OC1ocC5j/b20vZGlnbWVkaWFs/aWIvcHJvZGltZy9s/b3dyZXMvYzA3ODE5/NTMxLnBuZz9pbXdp/ZHRoPTI3MCZpbWRl/bnNpdHk9MSZpbXBv/bGljeT1QbmdfUmVz",
       "categorie": "peripherique",
       "coleur": "noir",
       "stock": 0
@@ -72,7 +61,7 @@
       "price": 1299,
       "description": "Smartphone Samsung haut de gamme avec caméra 200MP",
       "oldPrice": 1499,
-      "imageUrl": "https://images.samsung.com/is/image/samsung/p6pim/fr/2401/gallery/fr-galaxy-s24-s928-sm-s928bztqeub-thumb-539626268",
+      "imageUrl": "https://m.media-amazon.com/images/I/61n0lmxP5-L.__AC_SX300_SY300_QL70_FMwebp_.jpg",
       "categorie": "smartphone",
       "coleur": "titanium",
       "stock": 7
@@ -83,7 +72,7 @@
       "price": 1399,
       "description": "iPhone dernière génération avec puce A18 Pro",
       "oldPrice": 1599,
-      "imageUrl": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-7inch-naturaltitanium",
+      "imageUrl": "https://ss7.vzw.com/is/image/VerizonWireless/apple-iphone-16-pro-max-desert-titanium?wid=400&hei=400&fmt=webp-alpha",
       "categorie": "smartphone",
       "coleur": "titanium naturel",
       "stock": 3
@@ -94,21 +83,10 @@
       "price": 279,
       "description": "Écouteurs sans fil Apple avec réduction de bruit active",
       "oldPrice": 329,
-      "imageUrl": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/airpods-pro-2-hero-select-202209",
+      "imageUrl": "https://thumbs.dreamstime.com/z/rostov-don-russia-december-apple-airpods-pro-white-background-wireless-headphones-charging-case-box-close-up-182760386.jpg?ct=jpeg",
       "categorie": "audio",
       "coleur": "blanc",
       "stock": 25
-    },
-    {
-      "id": "PR012",
-      "name": "Sony WH-1000XM5",
-      "price": 349,
-      "description": "Casque sans fil Sony avec réduction de bruit premium",
-      "oldPrice": 399,
-      "imageUrl": "https://www.sony.fr/image/5d02da5df552836db894652238b6b6c4?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF",
-      "categorie": "audio",
-      "coleur": "noir",
-      "stock": 18
     },
     {
       "id": "PR016",
@@ -116,54 +94,10 @@
       "price": 499,
       "description": "Console de jeu Sony nouvelle génération",
       "oldPrice": 549,
-      "imageUrl": "https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21",
+      "imageUrl": "https://imgs.search.brave.com/jk5dqTp4NOZVOplg2MrofOBM44_yrfn966ZlvuInY2w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuYmVlYm9tLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/My8xMC9uZXctUFM1/LVNsaW0tZ2FtaW5n/LWNvbnNvbGUtZGlz/Yy1kcml2ZS5qcGc_/dz03NTA",
       "categorie": "gaming",
       "coleur": "blanc",
       "stock": 2
-    },
-    {
-      "id": "PR019",
-      "name": "Logitech MX Master 3S",
-      "price": 99,
-      "description": "Souris Logitech ergonomique pour professionnels",
-      "oldPrice": 119,
-      "imageUrl": "https://resource.logitechg.com/w_692,c_lpad,ar_4:3,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3s/gallery/mx-master-3s-mouse-top-view-graphite.png",
-      "categorie": "peripherique",
-      "coleur": "graphite",
-      "stock": 14
-    },
-    {
-      "id": "PR021",
-      "name": "Google Nest Hub Max",
-      "price": 229,
-      "description": "Assistant vocal Google avec écran 10 pouces",
-      "oldPrice": 279,
-      "imageUrl": "https://lh3.googleusercontent.com/EbGxJWh7VfX1w_LKOZGYCGjNZoECN_SqO_9XDfYGNJp3RvvzQ_q4GZyKXYE2RCRlRXbkCjseDTOqN-N7PX6h=rw-e365-w1200",
-      "categorie": "smart_home",
-      "coleur": "charbon",
-      "stock": 6
-    },
-    {
-      "id": "PR024",
-      "name": "GoPro Hero 12",
-      "price": 399,
-      "description": "Caméra d'action GoPro ultra-compacte",
-      "oldPrice": 449,
-      "imageUrl": "https://gopro.com/content/dam/gopro/hero12-black/pdp/hero12-black-pdp-gallery-1.jpg",
-      "categorie": "camera",
-      "coleur": "noir",
-      "stock": 9
-    },
-    {
-      "id": "PR025",
-      "name": "Asus ROG Gaming Laptop",
-      "price": 1599,
-      "description": "PC portable gaming Asus avec RTX 4060",
-      "oldPrice": 1799,
-      "imageUrl": "https://dlcdnwebimgs.asus.com/gain/9b14d2f6-b3a1-40bc-8bb7-5c8f6e2b6b83/w717/h525",
-      "categorie": "pc",
-      "coleur": "noir",
-      "stock": 4
     },
     {
       "id": "PR026",
@@ -171,21 +105,10 @@
       "price": 429,
       "description": "Montre connectée Apple avec GPS",
       "oldPrice": 479,
-      "imageUrl": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/watch-s9-gps-select-202309-41mm-pink",
+      "imageUrl": "https://powermaccenter.com/cdn/shop/files/Apple_Watch_Series_10_42mm_GPS_Rose_Gold_Aluminum_Sport_Band_Light_Blush_PDP_Image_Position_1__en-US_3f57fb39-96b6-4cec-90e9-c70e3ee65a49.jpg?v=1727185359&width=823",
       "categorie": "wearable",
       "coleur": "rose",
       "stock": 11
-    },
-    {
-      "id": "PR027",
-      "name": "Dyson V15 Detect",
-      "price": 599,
-      "description": "Aspirateur sans fil Dyson avec laser",
-      "oldPrice": 699,
-      "imageUrl": "https://dyson-h.assetsadobe2.com/is/image/content/dam/dyson/products/vacuums/V15/overview/dyson-v15-detect-yellow-nickel-1.jpg",
-      "categorie": "electromenager",
-      "coleur": "jaune",
-      "stock": 13
     },
     {
       "id": "PR028",
@@ -193,7 +116,7 @@
       "price": 2499,
       "description": "Appareil photo Canon hybride plein format",
       "oldPrice": 2799,
-      "imageUrl": "https://www.canon.fr/media/1vv3r3aa/eos-r6-mark-ii-front-rf24-105mm-f4-l-is-usm.png",
+      "imageUrl": "https://imgs.search.brave.com/bzIlm4oBQmIuNpAoEosVLNSX2emh7bdeaPBZxJVq2Cw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/bW9zLmNtcy5mdXR1/cmVjZG4ubmV0L0tK/NFJZUEJYWXB4dUpF/VWU0WlBaelUuanBn",
       "categorie": "camera",
       "coleur": "noir",
       "stock": 1
@@ -208,17 +131,6 @@
       "categorie": "auto",
       "coleur": "noir",
       "stock": 20
-    },
-    {
-      "id": "PR030",
-      "name": "Microsoft Surface Pro 9",
-      "price": 1299,
-      "description": "Tablette Microsoft 2-en-1 avec clavier",
-      "oldPrice": 1499,
-      "imageUrl": "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4LfaC",
-      "categorie": "tablette",
-      "coleur": "platine",
-      "stock": 0
     }
   ],
   "users": [
@@ -275,6 +187,33 @@
       "password": "123456",
       "phone": "0654020147",
       "address": "el jadida"
+    },
+    {
+      "id": "740d",
+      "nom": "ouseffar",
+      "prenom": "othman",
+      "email": "othman@gmail.com",
+      "password": "123456",
+      "phone": "0654010404",
+      "address": "el jadida "
+    },
+    {
+      "id": "e730",
+      "nom": "ayman",
+      "prenom": "ayman",
+      "email": "ayman@gmail.com",
+      "password": "123456",
+      "phone": "06454818194",
+      "address": "el jadida "
+    },
+    {
+      "id": "022c",
+      "nom": "khalid",
+      "prenom": "khalid",
+      "email": "k@gmail.com",
+      "password": "123456",
+      "phone": "0623124879",
+      "address": "casablanca"
     }
   ],
   "orders": [
@@ -382,6 +321,87 @@
       "shippingAddress": "el jadida rue chaouib dokkali rue23",
       "total": 758,
       "date": "1751123909947"
+    },
+    {
+      "id": "f429",
+      "userId": "971a",
+      "products": [
+        {
+          "productId": "PR002",
+          "quantity": 1,
+          "price": 699
+        },
+        {
+          "productId": "PR006",
+          "quantity": 1,
+          "price": 379
+        },
+        {
+          "productId": "PR007",
+          "quantity": 1,
+          "price": 699
+        }
+      ],
+      "shippingAddress": "larache sidi moumen",
+      "total": 1777,
+      "date": "1751127338861"
+    },
+    {
+      "id": "434c",
+      "userId": "740d",
+      "products": [
+        {
+          "productId": "PR001",
+          "quantity": 1,
+          "price": 379
+        },
+        {
+          "productId": "PR003",
+          "quantity": 1,
+          "price": 219
+        },
+        {
+          "productId": "PR007",
+          "quantity": 1,
+          "price": 699
+        },
+        {
+          "productId": "PR006",
+          "quantity": 1,
+          "price": 379
+        }
+      ],
+      "shippingAddress": "el jadida rue 1761 1771 apprt 901",
+      "total": 1676,
+      "date": "1751135269278"
+    },
+    {
+      "id": "3938",
+      "userId": "740d",
+      "products": [
+        {
+          "productId": "PR001",
+          "quantity": 1,
+          "price": 379
+        }
+      ],
+      "shippingAddress": "ysushhsje zjjzjzjzjz zjzjjzjzjzjzj zjzjzj",
+      "total": 379,
+      "date": "1751135711669"
+    },
+    {
+      "id": "2748",
+      "userId": "740d",
+      "products": [
+        {
+          "productId": "PR001",
+          "quantity": 1,
+          "price": 379
+        }
+      ],
+      "shippingAddress": "hzjzjzkoalalla sksjjzjz",
+      "total": 379,
+      "date": "1751136668961"
     }
   ],
   "favorites": [
@@ -396,5 +416,23 @@
       "productId": "PR007"
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "id": "222e",
+      "userId": "971a",
+      "product": {
+        "id": "PR006",
+        "name": "Hp-imprimante",
+        "price": 379,
+        "description": "Imprimante HP multifonction",
+        "oldPrice": 619,
+        "imageUrl": "https://www.bureau-vallee.fr/fstrz/r/s/dxbyzx5id4chj.cloudfront.net/fit-in/815x815/filters:fill(fff)/pub/media/catalog/product/7/9/3/8/5/1/P_79385187_1.jpg",
+        "categorie": "peripherique",
+        "coleur": "noir",
+        "stock": 5
+      },
+      "quantity": 3,
+      "dateAdded": "1751130447865"
+    }
+  ]
 }
