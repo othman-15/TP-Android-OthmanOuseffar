@@ -214,6 +214,15 @@
       "password": "123456",
       "phone": "0623124879",
       "address": "casablanca"
+    },
+    {
+      "id": "b487",
+      "nom": "ayman",
+      "prenom": "ayman",
+      "email": "ayman@gmai.com",
+      "password": "123456",
+      "phone": "0651079812",
+      "address": "laarache"
     }
   ],
   "orders": [
@@ -402,6 +411,30 @@
       "shippingAddress": "hzjzjzkoalalla sksjjzjz",
       "total": 379,
       "date": "1751136668961"
+    },
+    {
+      "id": "535e",
+      "userId": "b487",
+      "products": [
+        {
+          "productId": "PR006",
+          "quantity": 1,
+          "price": 379
+        },
+        {
+          "productId": "PR003",
+          "quantity": 1,
+          "price": 219
+        },
+        {
+          "productId": "PR001",
+          "quantity": 1,
+          "price": 379
+        }
+      ],
+      "shippingAddress": "el jadida  rue 1781 poa",
+      "total": 977,
+      "date": "1751145913926"
     }
   ],
   "favorites": [

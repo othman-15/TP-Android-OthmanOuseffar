@@ -23,7 +23,7 @@ interface ApiService {
     @GET("users/{id}")
     suspend fun getUserById(@Path("id") id: String): Response<User>
 
-    // Favorites
+
     @POST("favorites")
     suspend fun addToFavorites(@Body favorite: Favorite): Response<Favorite>
 
@@ -55,19 +55,19 @@ interface ApiService {
     @GET("orders")
     suspend fun getAllOrders(): Response<List<Order>>
 
-    // Alternative endpoint that might work better with your current API structure
+
     @GET("orders/user/{userId}")
     suspend fun getUserOrders(@Path("userId") userId: String): Response<List<Order>>
 
-    // Cancel order
+
     @PUT("orders/{orderId}/cancel")
     suspend fun cancelOrder(@Path("orderId") orderId: String): Response<ApiResponse>
 
-    // Reorder items
+
     @POST("orders/{orderId}/reorder")
     suspend fun reorderItems(@Path("orderId") orderId: String): Response<Order>
 
-    // Update order status
+
     @PUT("orders/{orderId}/status")
     suspend fun updateOrderStatus(
         @Path("orderId") orderId: String,
