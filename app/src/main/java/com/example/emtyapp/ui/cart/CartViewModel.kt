@@ -19,7 +19,6 @@ class CartViewModel @Inject constructor(
     val state: StateFlow<CartViewState> = _state.asStateFlow()
 
     init {
-
         viewModelScope.launch {
             profileRepository.isLoggedIn.collect { isLoggedIn ->
                 if (isLoggedIn) {
@@ -31,14 +30,13 @@ class CartViewModel @Inject constructor(
         }
     }
 
-
     fun handleIntent(intent: CartIntent) {
         when (intent) {
             is CartIntent.LoadCart -> {
                 viewModelScope.launch { loadCart() }
             }
             is CartIntent.AddToCart -> {
-                viewModelScope.launch { addToCart(intent.product) }
+                viewModelScope.launch { addToCart(intent.product, intent.quantity) }
             }
             is CartIntent.UpdateQuantity -> {
                 viewModelScope.launch { updateQuantity(intent.cartItemId, intent.quantity) }
@@ -50,7 +48,7 @@ class CartViewModel @Inject constructor(
                 viewModelScope.launch { clearCart() }
             }
             is CartIntent.Checkout -> {
-                viewModelScope.launch { checkout() }
+                viewModelScope.launch { checkout(intent.shippingAddress) }
             }
         }
     }
@@ -59,15 +57,14 @@ class CartViewModel @Inject constructor(
         return profileRepository.isLoggedIn.first()
     }
 
-    private suspend fun addToCart(product: com.example.emtyapp.data.Entities.Product) {
+    private suspend fun addToCart(product: com.example.emtyapp.data.Entities.Product, quantity: Int = 1) {
         try {
             if (!checkUserLoggedIn()) {
                 _state.value = CartViewState.NotLoggedIn
                 return
             }
 
-            cartRepository.addToCart(product)
-
+            cartRepository.addToCart(product, quantity)
             loadCartData()
         } catch (e: Exception) {
             _state.value = CartViewState.Error("Erreur lors de l'ajout au panier: ${e.message}")
@@ -83,9 +80,7 @@ class CartViewModel @Inject constructor(
         try {
             _state.value = CartViewState.Loading
 
-
             (cartRepository as? com.example.emtyapp.data.Repository.CartRepositoryImpl)?.loadCartFromApi()
-
 
             cartRepository.getCartItems()
                 .catch { e ->
@@ -104,7 +99,6 @@ class CartViewModel @Inject constructor(
             _state.value = CartViewState.Error("Erreur lors du chargement: ${e.message}")
         }
     }
-
 
     private suspend fun loadCartData() {
         try {
@@ -163,20 +157,27 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    private suspend fun checkout() {
+    private suspend fun checkout(shippingAddress: String) {
         try {
             if (!checkUserLoggedIn()) {
                 _state.value = CartViewState.NotLoggedIn
                 return
             }
 
+            // Validation de l'adresse
+            if (shippingAddress.trim().isEmpty()) {
+                _state.value = CartViewState.Error("L'adresse de livraison est obligatoire")
+                return
+            }
+
+            if (shippingAddress.trim().length < 10) {
+                _state.value = CartViewState.Error("L'adresse de livraison doit être plus détaillée")
+                return
+            }
+
             _state.value = CartViewState.Loading
 
-
-            val currentUser = profileRepository.currentUser.first()
-            val shippingAddress = currentUser?.address ?: "Adresse par défaut"
-
-            val order = cartRepository.checkout(shippingAddress)
+            val order = cartRepository.checkout(shippingAddress.trim())
             _state.value = CartViewState.CheckoutSuccess
         } catch (e: Exception) {
             _state.value = CartViewState.Error("Erreur lors de la commande: ${e.message}")

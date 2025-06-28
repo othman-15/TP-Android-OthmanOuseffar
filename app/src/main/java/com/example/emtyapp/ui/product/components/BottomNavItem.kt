@@ -22,7 +22,7 @@ val bottomNavItems = listOf(
     BottomNavItem("home", Icons.Default.Home),
     BottomNavItem("cart", Icons.Default.ShoppingCart),
     BottomNavItem("profile", Icons.Default.Person),
-    BottomNavItem("search", Icons.Default.Search)
+    BottomNavItem("favorite", Icons.Default.Favorite)
 )
 
 @Composable

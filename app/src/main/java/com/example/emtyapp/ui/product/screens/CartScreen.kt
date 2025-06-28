@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
@@ -119,8 +120,8 @@ fun CartScreen(
                         onRemoveItem = { cartItemId ->
                             viewModel.handleIntent(RemoveItem(cartItemId))
                         },
-                        onCheckout = {
-                            viewModel.handleIntent(CartIntent.Checkout)
+                        onCheckout = { shippingAddress ->
+                            viewModel.handleIntent(CartIntent.Checkout(shippingAddress))
                         },
                         modifier = Modifier.padding(paddingValues)
                     )
@@ -144,7 +145,6 @@ fun CartScreen(
                 is CartViewState.NotLoggedIn -> {
                     NotLoggedInContent(
                         onLogin = {
-
                             navController.navigate("profile")
                         },
                         onBack = { navController.popBackStack() },
@@ -163,18 +163,79 @@ private fun CartContent(
     itemsCount: Int,
     onQuantityChange: (String, Int) -> Unit,
     onRemoveItem: (String) -> Unit,
-    onCheckout: () -> Unit,
+    onCheckout: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var shippingAddress by remember { mutableStateOf("") }
+    var showCheckoutDialog by remember { mutableStateOf(false) }
+
+    // Checkout Dialog
+    if (showCheckoutDialog) {
+        AlertDialog(
+            onDismissRequest = { showCheckoutDialog = false },
+            title = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        Icons.Default.LocationOn,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Adresse de livraison")
+                }
+            },
+            text = {
+                Column {
+                    Text(
+                        text = "Veuillez saisir votre adresse de livraison complète :",
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+
+                    OutlinedTextField(
+                        value = shippingAddress,
+                        onValueChange = { shippingAddress = it },
+                        label = { Text("Adresse de livraison") },
+                        placeholder = { Text("Ex: 123 Rue Mohammed V, Casablanca") },
+                        modifier = Modifier.fillMaxWidth(),
+                        minLines = 3,
+                        maxLines = 5,
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        if (shippingAddress.trim().isNotEmpty()) {
+                            showCheckoutDialog = false
+                            onCheckout(shippingAddress.trim())
+                        }
+                    },
+                    enabled = shippingAddress.trim().isNotEmpty()
+                ) {
+                    Text("Confirmer la commande")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showCheckoutDialog = false }) {
+                    Text("Annuler")
+                }
+            }
+        )
+    }
+
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-
+        // Items List
         LazyColumn(
             modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(vertical = 8.dp)
         ) {
-
             items(items, key = { it.id }) { cartItem ->
                 CartItemComponent(
                     cartItem = cartItem,
@@ -190,6 +251,7 @@ private fun CartContent(
             }
         }
 
+        // Bottom Summary Section
         Surface(
             modifier = Modifier.fillMaxWidth(),
             shadowElevation = 8.dp,
@@ -198,38 +260,108 @@ private fun CartContent(
             Column(
                 modifier = Modifier.padding(16.dp)
             ) {
-
-                Row(
+                // Order Summary
+                Card(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                    )
                 ) {
-                    Text(
-                        text = "$itemsCount article${if (itemsCount > 1) "s" else ""}",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                    Text(
-                        text = "Total: ${totalPrice}DH",
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            fontWeight = FontWeight.Bold
-                        ),
-                        color = MaterialTheme.colorScheme.primary
-                    )
+                    Column(
+                        modifier = Modifier.padding(16.dp)
+                    ) {
+                        Text(
+                            text = "Résumé de la commande",
+                            style = MaterialTheme.typography.titleMedium.copy(
+                                fontWeight = FontWeight.Bold
+                            )
+                        )
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "$itemsCount article${if (itemsCount > 1) "s" else ""}",
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                            Text(
+                                text = "%.2f DH".format(totalPrice),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Livraison",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = "Gratuite",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+
+                        Divider(
+                            modifier = Modifier.padding(vertical = 8.dp),
+                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
+                        )
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Total",
+                                style = MaterialTheme.typography.titleLarge.copy(
+                                    fontWeight = FontWeight.Bold
+                                )
+                            )
+                            Text(
+                                text = "%.2f DH".format(totalPrice),
+                                style = MaterialTheme.typography.titleLarge.copy(
+                                    fontWeight = FontWeight.Bold
+                                ),
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Checkout Button
                 Button(
-                    onClick = onCheckout,
+                    onClick = { showCheckoutDialog = true },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text(
-                        "Commander maintenant",
-                        style = MaterialTheme.typography.titleMedium.copy(
-                            fontWeight = FontWeight.Bold
-                        ),
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.padding(vertical = 8.dp)
-                    )
+                    ) {
+                        Icon(
+                            Icons.Default.LocationOn,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            "Passer la commande",
+                            style = MaterialTheme.typography.titleMedium.copy(
+                                fontWeight = FontWeight.Bold
+                            )
+                        )
+                    }
                 }
             }
         }

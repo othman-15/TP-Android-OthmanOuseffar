@@ -8,7 +8,8 @@
       "oldPrice": 619,
       "imageUrl": "https://via.placeholder.com/300x200/007bff/ffffff?text=HP+Revolution+6",
       "categorie": "pc",
-      "coleur": "noir"
+      "coleur": "noir",
+      "stock": 15
     },
     {
       "id": "PR002",
@@ -18,7 +19,8 @@
       "oldPrice": 900,
       "imageUrl": "https://via.placeholder.com/300x200/28a745/ffffff?text=Robot+Cuisine",
       "categorie": "electromenager",
-      "coleur": "blanc"
+      "coleur": "blanc",
+      "stock": 8
     },
     {
       "id": "PR003",
@@ -28,7 +30,8 @@
       "oldPrice": 272,
       "imageUrl": "https://via.placeholder.com/300x200/dc3545/ffffff?text=HP+Pavilion",
       "categorie": "pc",
-      "coleur": "argent"
+      "coleur": "argent",
+      "stock": 22
     },
     {
       "id": "PR006",
@@ -38,7 +41,8 @@
       "oldPrice": 619,
       "imageUrl": "https://www.bureau-vallee.fr/fstrz/r/s/dxbyzx5id4chj.cloudfront.net/fit-in/815x815/filters:fill(fff)/pub/media/catalog/product/7/9/3/8/5/1/P_79385187_1.jpg",
       "categorie": "peripherique",
-      "coleur": "noir"
+      "coleur": "noir",
+      "stock": 5
     },
     {
       "id": "PR007",
@@ -48,7 +52,8 @@
       "oldPrice": 900,
       "imageUrl": "https://www.lifewire.com/thmb/WKv1B2Cr8bQS7yhS_btM1HKx5Jc=/850x850/filters:no_upscale():max_bytes(150000):strip_icc()/_hero_horiz_MacBook-Air-M1-2020-Computer-1-030783bfc1ec44f6be220018b3b89239.jpg",
       "categorie": "pc",
-      "coleur": "gris"
+      "coleur": "gris",
+      "stock": 12
     },
     {
       "id": "PR008",
@@ -58,7 +63,8 @@
       "oldPrice": 272,
       "imageUrl": "https://via.placeholder.com/300x200/17a2b8/ffffff?text=HP+Mouse",
       "categorie": "peripherique",
-      "coleur": "noir"
+      "coleur": "noir",
+      "stock": 0
     },
     {
       "id": "PR009",
@@ -68,7 +74,8 @@
       "oldPrice": 1499,
       "imageUrl": "https://images.samsung.com/is/image/samsung/p6pim/fr/2401/gallery/fr-galaxy-s24-s928-sm-s928bztqeub-thumb-539626268",
       "categorie": "smartphone",
-      "coleur": "titanium"
+      "coleur": "titanium",
+      "stock": 7
     },
     {
       "id": "PR010",
@@ -78,7 +85,8 @@
       "oldPrice": 1599,
       "imageUrl": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-7inch-naturaltitanium",
       "categorie": "smartphone",
-      "coleur": "titanium naturel"
+      "coleur": "titanium naturel",
+      "stock": 3
     },
     {
       "id": "PR011",
@@ -88,7 +96,8 @@
       "oldPrice": 329,
       "imageUrl": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/airpods-pro-2-hero-select-202209",
       "categorie": "audio",
-      "coleur": "blanc"
+      "coleur": "blanc",
+      "stock": 25
     },
     {
       "id": "PR012",
@@ -98,37 +107,8 @@
       "oldPrice": 399,
       "imageUrl": "https://www.sony.fr/image/5d02da5df552836db894652238b6b6c4?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF",
       "categorie": "audio",
-      "coleur": "noir"
-    },
-    {
-      "id": "PR013",
-      "name": "iPad Air 6",
-      "price": 649,
-      "description": "Tablette Apple avec puce M2 et écran 10.9 pouces",
-      "oldPrice": 749,
-      "imageUrl": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/ipad-air-select-wifi-blue-202211",
-      "categorie": "tablette",
-      "coleur": "bleu"
-    },
-    {
-      "id": "PR014",
-      "name": "Samsung Galaxy Tab S9",
-      "price": 599,
-      "description": "Tablette Samsung avec S Pen inclus",
-      "oldPrice": 699,
-      "imageUrl": "https://images.samsung.com/is/image/samsung/p6pim/fr/2307/gallery/fr-galaxy-tab-s9-x710-sm-x710nzaaeub-thumb-537458671",
-      "categorie": "tablette",
-      "coleur": "beige"
-    },
-    {
-      "id": "PR015",
-      "name": "Nintendo Switch OLED",
-      "price": 349,
-      "description": "Console de jeu Nintendo avec écran OLED",
-      "oldPrice": 399,
-      "imageUrl": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000000964/811316ca3a7149e6be1c2e4bb1e4fb7c6f3c7bd0a5e1bf1a2a7b4b4e4c4d7d66",
-      "categorie": "gaming",
-      "coleur": "blanc/noir"
+      "coleur": "noir",
+      "stock": 18
     },
     {
       "id": "PR016",
@@ -138,27 +118,8 @@
       "oldPrice": 549,
       "imageUrl": "https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21",
       "categorie": "gaming",
-      "coleur": "blanc"
-    },
-    {
-      "id": "PR017",
-      "name": "Bose QuietComfort 45",
-      "price": 299,
-      "description": "Casque Bose avec réduction de bruit exceptionnelle",
-      "oldPrice": 349,
-      "imageUrl": "https://assets.bose.com/content/dam/cloudassets/Bose_DAM/Web/consumer_electronics/global/products/headphones/qc45_headphones/product_silo_images/QC45_PDP_Ecom-Gallery-B01.jpg",
-      "categorie": "audio",
-      "coleur": "noir"
-    },
-    {
-      "id": "PR018",
-      "name": "Dell XPS 13",
-      "price": 1099,
-      "description": "Ultrabook Dell premium avec écran InfinityEdge",
-      "oldPrice": 1299,
-      "imageUrl": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/13-9315/media-gallery/notebook-xps-13-9315-nt-blue-gallery-1.psd",
-      "categorie": "pc",
-      "coleur": "bleu"
+      "coleur": "blanc",
+      "stock": 2
     },
     {
       "id": "PR019",
@@ -168,17 +129,8 @@
       "oldPrice": 119,
       "imageUrl": "https://resource.logitechg.com/w_692,c_lpad,ar_4:3,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3s/gallery/mx-master-3s-mouse-top-view-graphite.png",
       "categorie": "peripherique",
-      "coleur": "graphite"
-    },
-    {
-      "id": "PR020",
-      "name": "Samsung 4K Monitor 27\"",
-      "price": 449,
-      "description": "Moniteur Samsung 4K UHD 27 pouces",
-      "oldPrice": 529,
-      "imageUrl": "https://images.samsung.com/is/image/samsung/p6pim/levant/lf27t450fqmxue/gallery/levant-f27t450fqm-lf27t450fqmxue-537108698",
-      "categorie": "peripherique",
-      "coleur": "noir"
+      "coleur": "graphite",
+      "stock": 14
     },
     {
       "id": "PR021",
@@ -188,27 +140,8 @@
       "oldPrice": 279,
       "imageUrl": "https://lh3.googleusercontent.com/EbGxJWh7VfX1w_LKOZGYCGjNZoECN_SqO_9XDfYGNJp3RvvzQ_q4GZyKXYE2RCRlRXbkCjseDTOqN-N7PX6h=rw-e365-w1200",
       "categorie": "smart_home",
-      "coleur": "charbon"
-    },
-    {
-      "id": "PR022",
-      "name": "JBL Charge 5",
-      "price": 179,
-      "description": "Enceinte Bluetooth JBL portable étanche",
-      "oldPrice": 199,
-      "imageUrl": "https://fr.jbl.com/dw/image/v2/BFND_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dw8e7a0b3a/JBL_Charge5_ProductImage_Hero_Blue_x1.png",
-      "categorie": "audio",
-      "coleur": "bleu"
-    },
-    {
-      "id": "PR023",
-      "name": "Kindle Paperwhite",
-      "price": 149,
-      "description": "Liseuse Amazon avec éclairage intégré",
-      "oldPrice": 179,
-      "imageUrl": "https://m.media-amazon.com/images/I/61IPJOx5HuL._AC_SL1500_.jpg",
-      "categorie": "lecteur",
-      "coleur": "noir"
+      "coleur": "charbon",
+      "stock": 6
     },
     {
       "id": "PR024",
@@ -218,7 +151,8 @@
       "oldPrice": 449,
       "imageUrl": "https://gopro.com/content/dam/gopro/hero12-black/pdp/hero12-black-pdp-gallery-1.jpg",
       "categorie": "camera",
-      "coleur": "noir"
+      "coleur": "noir",
+      "stock": 9
     },
     {
       "id": "PR025",
@@ -228,7 +162,8 @@
       "oldPrice": 1799,
       "imageUrl": "https://dlcdnwebimgs.asus.com/gain/9b14d2f6-b3a1-40bc-8bb7-5c8f6e2b6b83/w717/h525",
       "categorie": "pc",
-      "coleur": "noir"
+      "coleur": "noir",
+      "stock": 4
     },
     {
       "id": "PR026",
@@ -238,7 +173,8 @@
       "oldPrice": 479,
       "imageUrl": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/watch-s9-gps-select-202309-41mm-pink",
       "categorie": "wearable",
-      "coleur": "rose"
+      "coleur": "rose",
+      "stock": 11
     },
     {
       "id": "PR027",
@@ -248,7 +184,8 @@
       "oldPrice": 699,
       "imageUrl": "https://dyson-h.assetsadobe2.com/is/image/content/dam/dyson/products/vacuums/V15/overview/dyson-v15-detect-yellow-nickel-1.jpg",
       "categorie": "electromenager",
-      "coleur": "jaune"
+      "coleur": "jaune",
+      "stock": 13
     },
     {
       "id": "PR028",
@@ -258,7 +195,8 @@
       "oldPrice": 2799,
       "imageUrl": "https://www.canon.fr/media/1vv3r3aa/eos-r6-mark-ii-front-rf24-105mm-f4-l-is-usm.png",
       "categorie": "camera",
-      "coleur": "noir"
+      "coleur": "noir",
+      "stock": 1
     },
     {
       "id": "PR029",
@@ -268,7 +206,8 @@
       "oldPrice": 249,
       "imageUrl": "https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Model-Y-Interior-Hero-Desktop-LHD.jpg",
       "categorie": "auto",
-      "coleur": "noir"
+      "coleur": "noir",
+      "stock": 20
     },
     {
       "id": "PR030",
@@ -278,7 +217,8 @@
       "oldPrice": 1499,
       "imageUrl": "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4LfaC",
       "categorie": "tablette",
-      "coleur": "platine"
+      "coleur": "platine",
+      "stock": 0
     }
   ],
   "users": [
@@ -326,6 +266,15 @@
       "password": "123456",
       "phone": "0698451364\n",
       "address": "el jadida "
+    },
+    {
+      "id": "971a",
+      "nom": "o",
+      "prenom": "o",
+      "email": "oo@gmail.com",
+      "password": "123456",
+      "phone": "0654020147",
+      "address": "el jadida"
     }
   ],
   "orders": [
@@ -414,6 +363,25 @@
       "shippingAddress": "el jadida",
       "total": 2156,
       "date": "1751036860807"
+    },
+    {
+      "id": "2cec",
+      "userId": "971a",
+      "products": [
+        {
+          "productId": "PR001",
+          "quantity": 1,
+          "price": 379
+        },
+        {
+          "productId": "PR006",
+          "quantity": 1,
+          "price": 379
+        }
+      ],
+      "shippingAddress": "el jadida rue chaouib dokkali rue23",
+      "total": 758,
+      "date": "1751123909947"
     }
   ],
   "favorites": [

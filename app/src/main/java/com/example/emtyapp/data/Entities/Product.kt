@@ -12,6 +12,7 @@ data class Product(
     val imageUrl: String,
     val categorie: String? = null,
     val coleur: String? = null,
+    val stock: Int = 0
 
 
 )
