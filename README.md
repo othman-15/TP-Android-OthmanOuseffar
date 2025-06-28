@@ -25,16 +25,25 @@ Les fonctionnalités essentielles d’un site e-commerce sont intégrées : **au
 - 🌍 Interface multilingue (français / anglais)
 - 📱 UI responsive adaptée à smartphone et tablette
 ![home-screen](https://github.com/user-attachments/assets/186189b2-d943-4576-8e71-3dd9a0d08b81)
+
 ![details-screen](https://github.com/user-attachments/assets/feed0e8d-0ced-440a-bccc-df90265cbe9a)
+
 ![panier-non-connecter](https://github.com/user-attachments/assets/000afed8-9f26-48a0-95c2-c04dacf6bb46)
+
 ![commande-vide](https://github.com/user-attachments/assets/c790d8e3-386d-43ba-8027-0eeac5f4a347)
+
 ![panier-envoide commande](https://github.com/user-attachments/assets/cbd10e4f-4c07-4be9-97e1-fa531d18a97c)
+
 ![insription](https://github.com/user-attachments/assets/d0534215-1894-4ab9-b3ca-04b58eecd1d1)
+
 ![login](https://github.com/user-attachments/assets/9926d88e-3c88-4bd9-87c8-ec91d1e88072)
+
 ![login-apres-connection](https://github.com/user-attachments/assets/fd6ba807-8963-40ca-bcfd-8f31acce3a0e)
-![panier-vide](https://github.com/user-attachments/assets/7309f0
+
+![panier-vide](https://github.com/user-attachments/assets/6e82a519-f1e0-4901-8325-3f4245af01fe)
+
 ![panier-plein](https://github.com/user-attachments/assets/c6f070b6-a3fe-4145-a277-f21db2d9aede)
-e3-5cc9-4383-ba8c-87012685e7b5)
+
 
 ![suivie-commande](https://github.com/user-attachments/assets/826c464d-521b-48b8-9fbd-530003b722f7)
 
