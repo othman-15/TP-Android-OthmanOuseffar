@@ -208,7 +208,7 @@ private fun CartContent(
                         style = MaterialTheme.typography.bodyLarge
                     )
                     Text(
-                        text = "Total: ${totalPrice}€",
+                        text = "Total: ${totalPrice}DH",
                         style = MaterialTheme.typography.titleLarge.copy(
                             fontWeight = FontWeight.Bold
                         ),

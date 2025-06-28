@@ -81,7 +81,7 @@ fun CartItemComponent(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "${cartItem.product.price}€",
+                        text = "${cartItem.product.price}DH",
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Bold
                         ),
@@ -91,7 +91,7 @@ fun CartItemComponent(
                     if (cartItem.product.oldPrice > cartItem.product.price) {
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "${cartItem.product.oldPrice}€",
+                            text = "${cartItem.product.oldPrice}DH",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             textDecoration = TextDecoration.LineThrough
@@ -173,7 +173,7 @@ fun CartItemComponent(
 
 
                 Text(
-                    text = "%.2f€".format(cartItem.product.price * cartItem.quantity),
+                    text = "%.2fDH".format(cartItem.product.price * cartItem.quantity),
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold
                     ),

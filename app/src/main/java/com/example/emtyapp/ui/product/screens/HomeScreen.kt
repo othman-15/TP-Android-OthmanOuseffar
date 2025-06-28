@@ -54,7 +54,7 @@ fun HomeScreen(
                     onSearchClose = {
                         isSearchActive = false
                         searchQuery = ""
-                        // Reset to all products when search is closed
+
                         viewModel.handleIntent(ProductIntent.LoadProducts)
                     },
                     onSearch = { query ->
@@ -152,29 +152,7 @@ private fun MainTopBar(
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
-
-            IconButton(onClick = onNotificationClick) {
-                Icon(
-                    Icons.Default.Notifications,
-                    contentDescription = "Notifications",
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
-            }
-
-            Box {
-                IconButton(onClick = onCartClick) {
-                    Icon(
-                        Icons.Default.ShoppingCart,
-                        contentDescription = "Panier",
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-                Badge(
-                    modifier = Modifier.offset(x = (-4).dp, y = 4.dp)
-                ) {
-                    Text("2")
-                }
-            }
+            
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary
